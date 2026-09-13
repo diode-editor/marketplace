@@ -42,10 +42,10 @@ export function App(): React.JSX.Element {
         <div className="page">
             <Header theme={theme} onToggleTheme={() => setTheme(theme === "light" ? "dark" : "light")} />
             <main>
-                {remote.state === "loading" && <p className="status-block">загрузка каталога…</p>}
+                {remote.state === "loading" && <p className="status-block">loading the catalog…</p>}
                 {remote.state === "error" && (
                     <p className="status-block error" role="alert">
-                        не удалось загрузить каталог: {remote.message}
+                        failed to load the catalog: {remote.message}
                     </p>
                 )}
                 {remote.state === "ok" && <Routed hash={hash} index={remote.data} />}

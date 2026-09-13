@@ -16,19 +16,21 @@ function compareSemver(a: string, b: string): number {
 }
 
 export function formatSize(bytes: number): string {
-    if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} МБ`;
-    return `${Math.round(bytes / 1024)} КБ`;
+    if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+    return `${Math.round(bytes / 1024)} KB`;
 }
 
 export function formatDate(iso: string): string {
     const date = new Date(iso);
-    return Number.isNaN(date.getTime()) ? iso : date.toLocaleDateString("ru-RU");
+    return Number.isNaN(date.getTime())
+        ? iso
+        : date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 }
 
 export const KIND_LABELS: Readonly<Record<RegistryExtensionKind, string>> = {
-    "native": "нативное",
-    "proxy-openvsx": "сток · Open VSX",
-    "proxy-hosted": "сток · перевыложен",
+    "native": "native",
+    "proxy-openvsx": "stock · Open VSX",
+    "proxy-hosted": "stock · rehosted",
 };
 
 export function formatEngines(engines: RegistryEngines): string {

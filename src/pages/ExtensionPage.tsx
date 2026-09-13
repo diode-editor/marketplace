@@ -37,7 +37,7 @@ function Meta({ meta }: { readonly meta: RegistryExtensionMeta }): React.JSX.Ele
     return (
         <>
             <div className="breadcrumbs">
-                <a href="#/">расширения</a>
+                <a href="#/">extensions</a>
                 {langs[0] !== undefined && (
                     <>
                         <span>/</span>
@@ -71,7 +71,7 @@ function Meta({ meta }: { readonly meta: RegistryExtensionMeta }): React.JSX.Ele
                         {latest?.publishedAt !== undefined && (
                             <>
                                 <span>·</span>
-                                <span>обновлено {formatDate(latest.publishedAt)}</span>
+                                <span>updated {formatDate(latest.publishedAt)}</span>
                             </>
                         )}
                         {latest !== undefined && formatEngines(latest.engines) !== "" && (
@@ -87,12 +87,12 @@ function Meta({ meta }: { readonly meta: RegistryExtensionMeta }): React.JSX.Ele
                     <div className="btn-row">
                         {meta.repository !== undefined && (
                             <Button as="a" href={meta.repository} variant="secondary" size="sm" arrow>
-                                Источник
+                                Source
                             </Button>
                         )}
                         {meta.homepage !== undefined && (
                             <Button as="a" href={meta.homepage} variant="secondary" size="sm" arrow>
-                                Сайт
+                                Website
                             </Button>
                         )}
                     </div>
@@ -103,7 +103,7 @@ function Meta({ meta }: { readonly meta: RegistryExtensionMeta }): React.JSX.Ele
                 <div className="ext-main">
                     <div className="ext-main-inner">
                         <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
-                            <span className="eyebrow">01 / описание</span>
+                            <span className="eyebrow">01 / overview</span>
                             {meta.readme !== undefined && <span className="file-label">README.md</span>}
                         </div>
                         {meta.readme !== undefined ? (
@@ -117,35 +117,35 @@ function Meta({ meta }: { readonly meta: RegistryExtensionMeta }): React.JSX.Ele
 
                 <aside className="ext-aside">
                     <div className="aside-block">
-                        <div className="eyebrow">сведения</div>
+                        <div className="eyebrow">details</div>
                         <dl className="facts">
                             <div className="fact">
                                 <dt>id</dt>
                                 <dd>{meta.id}</dd>
                             </div>
                             <div className="fact">
-                                <dt>автор</dt>
+                                <dt>publisher</dt>
                                 <dd>@{meta.publisher}</dd>
                             </div>
                             {meta.license !== undefined && (
                                 <div className="fact">
-                                    <dt>лицензия</dt>
+                                    <dt>license</dt>
                                     <dd>{meta.license}</dd>
                                 </div>
                             )}
                             <div className="fact">
-                                <dt>тип</dt>
+                                <dt>kind</dt>
                                 <dd>{KIND_LABELS[meta.kind]}</dd>
                             </div>
                             {latest?.size !== undefined && (
                                 <div className="fact">
-                                    <dt>размер</dt>
+                                    <dt>size</dt>
                                     <dd>{formatSize(latest.size)}</dd>
                                 </div>
                             )}
                             {langs.length > 0 && (
                                 <div className="fact">
-                                    <dt>языки</dt>
+                                    <dt>languages</dt>
                                     <dd>{langs.join(", ")}</dd>
                                 </div>
                             )}
@@ -153,7 +153,7 @@ function Meta({ meta }: { readonly meta: RegistryExtensionMeta }): React.JSX.Ele
                     </div>
 
                     <div className="aside-block">
-                        <div className="eyebrow">версии</div>
+                        <div className="eyebrow">versions</div>
                         <div className="versions">
                             {/* Версия может повторяться: по записи на платформенный артефакт — ключ по sha256. */}
                             {[...meta.versions]
@@ -172,11 +172,11 @@ function Meta({ meta }: { readonly meta: RegistryExtensionMeta }): React.JSX.Ele
 export function ExtensionPage({ id }: { readonly id: string }): React.JSX.Element {
     const remote = useRemote(() => fetchExtensionMeta(id), id);
 
-    if (remote.state === "loading") return <p className="status-block">загрузка {id}…</p>;
+    if (remote.state === "loading") return <p className="status-block">loading {id}…</p>;
     if (remote.state === "error") {
         return (
             <p className="status-block error" role="alert">
-                не удалось загрузить {id}: {remote.message} · <a href="#/">← все расширения</a>
+                failed to load {id}: {remote.message} · <a href="#/">← all extensions</a>
             </p>
         );
     }

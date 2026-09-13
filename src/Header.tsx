@@ -13,12 +13,12 @@ export function Header({ theme, onToggleTheme }: { readonly theme: Theme; readon
                 </a>
                 <nav className="site-nav">
                     <a href="#/" className="active">
-                        расширения
+                        extensions
                     </a>
                     <a href={`${EDITOR_REPO}/tree/main/docs`}>docs</a>
                     <a href={EDITOR_REPO}>source</a>
                     <button type="button" className="theme-toggle" onClick={onToggleTheme}>
-                        тема: {theme === "light" ? "светлая" : "тёмная"}
+                        theme: {theme === "light" ? "light" : "dark"}
                     </button>
                 </nav>
             </div>
@@ -31,8 +31,8 @@ export function Footer(): React.JSX.Element {
         <footer className="site-footer">
             <div className="wrap">
                 <span>
-                    Реестр курируемый: в каталог попадает то, что проверено в diode.{" "}
-                    <a href="https://github.com/diode-editor/diode-editor.github.io#как-добавить-расширение">добавить расширение →</a>
+                    The registry is curated: only what has been verified in diode makes it in.{" "}
+                    <a href="https://github.com/diode-editor/diode-editor.github.io#как-добавить-расширение">add an extension →</a>
                 </span>
                 <span>
                     <a href="https://diode-editor.github.io/">diode-editor.github.io</a>

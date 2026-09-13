@@ -87,10 +87,10 @@ export function Home({ index, query, onQueryChange }: HomeProps): React.JSX.Elem
             <div className={searching ? "hero compact" : "hero"}>
                 {!searching && (
                     <div style={{ display: "flex", flexDirection: "column", gap: "var(--sp-4)" }}>
-                        <div className="eyebrow">магазин расширений</div>
-                        <h1>расширения</h1>
+                        <div className="eyebrow">extension store</div>
+                        <h1>extensions</h1>
                         <p className="lead">
-                            Один бинарник, никакой сборки — расширение ставится одной командой и читается одним файлом.
+                            One binary, no build step — an extension installs with one command and reads as one file.
                         </p>
                     </div>
                 )}
@@ -104,8 +104,8 @@ export function Home({ index, query, onQueryChange }: HomeProps): React.JSX.Elem
                         ref={inputRef}
                         value={query}
                         onChange={(e) => onQueryChange(e.target.value)}
-                        placeholder="поиск по названию, описанию или id"
-                        aria-label="Поиск расширений"
+                        placeholder="search by name, description or id"
+                        aria-label="Search extensions"
                     />
                     <span className="caret" />
                     {searching && (
@@ -116,7 +116,7 @@ export function Home({ index, query, onQueryChange }: HomeProps): React.JSX.Elem
                 </div>
 
                 <div className="chips">
-                    <span className="chips-label">языки</span>
+                    <span className="chips-label">languages</span>
                     {LANGUAGES.map((lang) => (
                         <a key={lang.id} href={`#/lang/${lang.id}`} className="chip">
                             {lang.label}
@@ -128,9 +128,9 @@ export function Home({ index, query, onQueryChange }: HomeProps): React.JSX.Elem
             {searching ? (
                 <>
                     <div className="section-head">
-                        <span className="eyebrow">результаты поиска</span>
+                        <span className="eyebrow">search results</span>
                         <span className="section-note">
-                            запрос: {query.trim()} · найдено {results.length}
+                            query: {query.trim()} · {results.length} found
                         </span>
                     </div>
                     <div>
@@ -139,7 +139,7 @@ export function Home({ index, query, onQueryChange }: HomeProps): React.JSX.Elem
                         ))}
                         <div className="list-footer">
                             <span className="hint">
-                                то же в буфере: <code>:ext search {query.trim()}</code>
+                                same thing in a buffer: <code>:ext search {query.trim()}</code>
                             </span>
                         </div>
                     </div>
@@ -149,8 +149,8 @@ export function Home({ index, query, onQueryChange }: HomeProps): React.JSX.Elem
                     {featured.length > 0 && (
                         <>
                             <div className="section-head">
-                                <span className="eyebrow">подборка</span>
-                                <span className="section-note">отбор мейнтейнеров</span>
+                                <span className="eyebrow">featured</span>
+                                <span className="section-note">maintainers&rsquo; picks</span>
                             </div>
                             <div className="featured-grid">
                                 {featured.map((entry) => (
@@ -160,8 +160,8 @@ export function Home({ index, query, onQueryChange }: HomeProps): React.JSX.Elem
                         </>
                     )}
                     <div className="section-head">
-                        <span className="eyebrow">все расширения</span>
-                        <span className="section-note">{index.extensions.length} в каталоге</span>
+                        <span className="eyebrow">all extensions</span>
+                        <span className="section-note">{index.extensions.length} in the catalog</span>
                     </div>
                     <div>
                         {index.extensions.map((entry) => (

@@ -28,7 +28,7 @@ export const LANGUAGES: readonly LanguageCuration[] = [
     {
         id: "python",
         label: "python",
-        blurb: "Поддержка Python собирается из расширений реестра: проверка типов и навигация по коду через basedpyright, линтер и форматтер — ruff.",
+        blurb: "Python support is assembled from registry extensions: type checking and code navigation via basedpyright, linting and formatting via ruff.",
         recommended: ["detachhead.basedpyright", "charliermarsh.ruff"],
     },
 ];

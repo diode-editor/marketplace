@@ -15,7 +15,7 @@ function Sidebar({ activeId }: { readonly activeId: string }): React.JSX.Element
     return (
         <aside className="lang-sidebar">
             <div className="group">
-                <div className="group-label">языки</div>
+                <div className="group-label">languages</div>
                 <nav>
                     {LANGUAGES.map((lang) => (
                         <a key={lang.id} href={`#/lang/${lang.id}`} className={lang.id === activeId ? "active" : undefined}>
@@ -25,9 +25,9 @@ function Sidebar({ activeId }: { readonly activeId: string }): React.JSX.Element
                 </nav>
             </div>
             <div className="side-note">
-                Каталог курируемый: сюда попадает то, что проверено в diode.
+                The catalog is curated: only what has been verified in diode makes it in.
                 <br />
-                Ставится в ~/.diode/ext
+                Installs into ~/.diode/ext
             </div>
         </aside>
     );
@@ -38,7 +38,7 @@ export function LanguagePage({ id, index }: { readonly id: string; readonly inde
     if (lang === undefined) {
         return (
             <p className="status-block error" role="alert">
-                языка «{id}» в каталоге нет · <a href="#/">← все расширения</a>
+                no language &ldquo;{id}&rdquo; in the catalog · <a href="#/">← all extensions</a>
             </p>
         );
     }
@@ -54,7 +54,7 @@ export function LanguagePage({ id, index }: { readonly id: string; readonly inde
             <Sidebar activeId={lang.id} />
             <div>
                 <div className="lang-hero">
-                    <div className="eyebrow">01 / поддержка языка</div>
+                    <div className="eyebrow">01 / language support</div>
                     <h1>
                         <Logo variant="mark" size={20} />
                         {lang.label}
@@ -64,18 +64,18 @@ export function LanguagePage({ id, index }: { readonly id: string; readonly inde
                         <div className="install-row">
                             <CommandBox command={installCommand(showcase.id)} copyable />
                             <a href={`#/ext/${showcase.id}`} style={{ fontSize: "var(--fs-ui)", color: "var(--text-muted)" }}>
-                                подробнее →
+                                details →
                             </a>
                         </div>
                     )}
                 </div>
 
                 <div className="section-head">
-                    <span className="eyebrow">02 / расширения</span>
-                    <span className="section-note">язык: {lang.label}</span>
+                    <span className="eyebrow">02 / extensions</span>
+                    <span className="section-note">language: {lang.label}</span>
                 </div>
                 <div className="lang-rows">
-                    {extensions.length === 0 && <p className="status-block">для этого языка в каталоге пока пусто</p>}
+                    {extensions.length === 0 && <p className="status-block">nothing in the catalog for this language yet</p>}
                     {[...(showcase !== undefined ? [showcase] : []), ...rest].map((entry) => (
                         <a key={entry.id} href={`#/ext/${entry.id}`} className="ext-row" style={{ color: "inherit" }}>
                             <span className="row-name">{entry.displayName}</span>
