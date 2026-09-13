@@ -63,6 +63,35 @@
   --selection-bg:var(--d-ink-2);
   --selection-ink:var(--d-bg-0);
 }
+/* System mode: no data-theme attribute on <html> — the OS picks the palette. */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme]){
+    --surface-canvas:var(--l-bg-0);
+    --surface-chrome:var(--l-bg-1);
+    --surface-card:var(--l-bg-0);
+    --surface-inset:var(--l-bg-2);
+    --border-hairline:var(--l-line-0);
+    --border-chrome:var(--l-line-1);
+    --border-strong:var(--l-line-2);
+    --text-display:var(--l-ink-0);
+    --text-strong:var(--l-ink-1);
+    --text-code:var(--l-ink-1);
+    --text-body:var(--l-ink-2);
+    --text-muted:var(--l-ink-3);
+    --text-faint:var(--l-ink-4);
+    --text-accent:var(--l-accent);
+    --accent:var(--l-accent);
+    --accent-fill:var(--l-accent-solid);
+    --accent-fill-hover:var(--l-accent-solid-hover);
+    --accent-fill-ink:#ffffff;
+    --statusbar-bg:var(--l-accent-bar);
+    --statusbar-ink:#ffffff;
+    --cursor:var(--l-accent);
+    --logo-lead:var(--l-line-3);
+    --selection-bg:var(--l-ink-1);
+    --selection-ink:#ffffff;
+  }
+}
 [data-theme="light"]{
   --surface-canvas:var(--l-bg-0);
   --surface-chrome:var(--l-bg-1);
