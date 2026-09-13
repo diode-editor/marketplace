@@ -1,0 +1,10 @@
+/* diode design system — tokens, snapshot of the claude.ai/design project
+   «diode Design System» (6cd3a4f3). Не редактировать вручную сверх нужды:
+   правки дизайна живут в дизайн-системе и приезжают сюда синком. */
+@import "./tokens/fonts.css";
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/borders.css";
+@import "./tokens/syntax.css";
+@import "./tokens/motion.css";

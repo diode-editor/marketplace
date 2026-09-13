@@ -1,0 +1,33 @@
+/* Spacing. The source uses odd, optically-set values rather than a strict grid —
+   these are the literal numbers from the page, not snapped to 4/8px. */
+:root{
+  --sp-1:6px;
+  --sp-2:8px;
+  --sp-3:10px;
+  --sp-4:12px;
+  --sp-5:16px;
+  --sp-6:18px;
+  --sp-7:24px;
+  --sp-8:26px;
+  --sp-9:34px;
+  --sp-10:40px;
+  --sp-11:44px;
+  --sp-12:92px;
+
+  --pad-nav:18px 34px;
+  --pad-section:26px 34px;
+  --pad-hero:92px 40px 40px;
+  --pad-btn:11px 19px;
+  --pad-btn-ghost:10px 18px;
+  --pad-chip:10px 18px;
+  --pad-tab:8px 16px;
+  --pad-statusbar:7px 16px;
+
+  --gap-nav:26px;
+  --gap-hero:26px;
+  --gap-btn-row:12px;
+  --gap-lockup:24px;
+  --gap-chip:10px;
+
+  --page-max:1080px;
+}

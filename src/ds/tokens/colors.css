@@ -1,0 +1,91 @@
+/* Base palette — lifted verbatim from the diode landing source.
+   :root is the DARK theme (the primary brand surface).
+   [data-theme="light"] re-points the same semantic aliases at the light editor theme. */
+:root{
+  /* dark base — editor chrome */
+  --d-bg-0:#1e1e1e;      /* editor / page canvas */
+  --d-bg-1:#252526;      /* chrome: header, tab strip, chips */
+  --d-line-0:#2d2d2d;    /* hairline on canvas */
+  --d-line-1:#333333;    /* border on chrome */
+  --d-line-2:#3c3c3c;    /* strong border (buttons, command box) */
+  --d-ink-0:#f0f0f0;     /* wordmark / display */
+  --d-ink-1:#e7e7e7;     /* strong UI text */
+  --d-ink-2:#d4d4d4;     /* code / body-on-dark */
+  --d-ink-3:#9d9d9d;     /* prose, secondary */
+  --d-ink-4:#858585;     /* nav links, labels */
+  --d-ink-5:#5a5a5a;     /* line numbers, disabled */
+  --d-accent:#569cd6;    /* brand blue on dark */
+  --d-accent-solid:#0e639c;   /* filled button */
+  --d-accent-solid-hover:#1177bb;
+  --d-accent-bar:#007acc;     /* status bar */
+
+  /* light base — light editor theme */
+  --l-bg-0:#ffffff;
+  --l-bg-1:#f3f3f3;
+  --l-bg-2:#f8f8f8;
+  --l-line-0:#e5e5e5;
+  --l-line-1:#e0e0e0;
+  --l-line-2:#d4d4d4;
+  --l-line-3:#d0d0d0;
+  --l-ink-0:#111111;
+  --l-ink-1:#1f1f1f;
+  --l-ink-2:#5a5a5a;
+  --l-ink-3:#616161;
+  --l-ink-4:#b0b0b0;
+  --l-accent:#0066b8;
+  --l-accent-solid:#0066b8;
+  --l-accent-solid-hover:#005ba4;
+  --l-accent-bar:#0066b8;
+
+  /* ---- semantic aliases (dark = default) ---- */
+  --surface-canvas:var(--d-bg-0);
+  --surface-chrome:var(--d-bg-1);
+  --surface-card:var(--d-bg-0);
+  --surface-inset:var(--d-bg-1);
+  --border-hairline:var(--d-line-0);
+  --border-chrome:var(--d-line-1);
+  --border-strong:var(--d-line-2);
+  --text-display:var(--d-ink-0);
+  --text-strong:var(--d-ink-1);
+  --text-code:var(--d-ink-2);
+  --text-body:var(--d-ink-3);
+  --text-muted:var(--d-ink-4);
+  --text-faint:var(--d-ink-5);
+  --text-accent:var(--d-accent);
+  --accent:var(--d-accent);
+  --accent-fill:var(--d-accent-solid);
+  --accent-fill-hover:var(--d-accent-solid-hover);
+  --accent-fill-ink:#ffffff;
+  --statusbar-bg:var(--d-accent-bar);
+  --statusbar-ink:#ffffff;
+  --cursor:var(--d-accent);
+  --logo-lead:var(--d-line-2);
+  --selection-bg:var(--d-ink-2);
+  --selection-ink:var(--d-bg-0);
+}
+[data-theme="light"]{
+  --surface-canvas:var(--l-bg-0);
+  --surface-chrome:var(--l-bg-1);
+  --surface-card:var(--l-bg-0);
+  --surface-inset:var(--l-bg-2);
+  --border-hairline:var(--l-line-0);
+  --border-chrome:var(--l-line-1);
+  --border-strong:var(--l-line-2);
+  --text-display:var(--l-ink-0);
+  --text-strong:var(--l-ink-1);
+  --text-code:var(--l-ink-1);
+  --text-body:var(--l-ink-2);
+  --text-muted:var(--l-ink-3);
+  --text-faint:var(--l-ink-4);
+  --text-accent:var(--l-accent);
+  --accent:var(--l-accent);
+  --accent-fill:var(--l-accent-solid);
+  --accent-fill-hover:var(--l-accent-solid-hover);
+  --accent-fill-ink:#ffffff;
+  --statusbar-bg:var(--l-accent-bar);
+  --statusbar-ink:#ffffff;
+  --cursor:var(--l-accent);
+  --logo-lead:var(--l-line-3);
+  --selection-bg:var(--l-ink-1);
+  --selection-ink:#ffffff;
+}

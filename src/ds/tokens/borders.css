@@ -1,0 +1,13 @@
+/* Borders, radii, shadows. diode is a terminal brand: everything is square,
+   there are no drop shadows inside the product surface, and separation is
+   carried by 1px hairlines only. */
+:root{
+  --radius-none:0;
+  --radius-chip:0;      /* chips and buttons are square — this is a terminal */
+  --radius-badge:4px;   /* only exception: small metadata pills */
+  --bw-hairline:1px;
+  --bw-tab-active:1px;  /* accent rule on the active tab, drawn on the top edge */
+  --bw-logo-lead:6px;   /* the diode's lead wire */
+  --shadow-none:none;
+  --shadow-frame:0 1px 3px rgba(0,0,0,.06); /* only for docs/preview chrome, never in-product */
+}

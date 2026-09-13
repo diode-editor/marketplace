@@ -1,0 +1,38 @@
+/* Type. The landing page is set almost entirely in JetBrains Mono — the editor's own
+   typeface used as the brand voice. IBM Plex Sans is the fallback UI/prose face,
+   IBM Plex Mono the alternate code face. */
+:root{
+  --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --font-sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+  --font-mono-alt:'IBM Plex Mono',ui-monospace,monospace;
+
+  --font-display:var(--font-mono);
+  --font-ui:var(--font-mono);
+  --font-prose:var(--font-mono);
+  --font-code:var(--font-mono);
+
+  --fw-regular:400;
+  --fw-medium:500;
+  --fw-bold:700;
+
+  /* sizes — exact values from the source page */
+  --fs-wordmark:104px;
+  --fs-wordmark-nav:13px;
+  --fs-lead:15px;
+  --fs-ui:13px;
+  --fs-code:12.5px;
+  --fs-chip:12px;
+  --fs-label:11.5px;
+  --fs-micro:10.5px;
+
+  --lh-tight:1;
+  --lh-code:1.85;
+  --lh-ui:1.7;
+  --lh-prose:1.7;
+
+  --ls-wordmark:-.045em;
+  --ls-lockup:.02em;
+  --ls-label:.12em;   /* uppercase eyebrow labels: 01 / БЫСТРО */
+
+  --measure-lead:520px;  /* hero paragraph max width */
+}

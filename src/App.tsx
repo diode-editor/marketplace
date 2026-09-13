@@ -1,164 +1,56 @@
 import { useEffect, useState } from "react";
-import {
-    fetchExtensionMeta,
-    fetchRegistryIndex,
-    type RegistryExtensionMeta,
-    type RegistryIndex,
-} from "./registry/client";
+import { Footer, Header, type Theme } from "./Header";
+import { useHashRoute, useRemote } from "./hooks";
+import { ExtensionPage } from "./pages/ExtensionPage";
+import { Home } from "./pages/Home";
+import { LanguagePage } from "./pages/LanguagePage";
+import { fetchRegistryIndex, type RegistryIndex } from "./registry/client";
 
-/**
- * Заглушка магазина: без дизайна, задача — доказать сквозной путь
- * «Pages-деплой → чтение registry/v1 → список → карточка». Роутинг — hash
- * (#/ext/<id>), чтобы прямые ссылки работали на GitHub Pages без 404-трюков.
- */
+/** Роутинг hash (#/ext/<id>, #/lang/<id>) — прямые ссылки работают на GitHub Pages без 404-трюков. */
 
-function useHashRoute(): string {
-    const [hash, setHash] = useState(window.location.hash);
-    useEffect(() => {
-        const onChange = (): void => setHash(window.location.hash);
-        window.addEventListener("hashchange", onChange);
-        return () => window.removeEventListener("hashchange", onChange);
-    }, []);
-    return hash;
+function readTheme(): Theme {
+    return localStorage.getItem("theme") === "light" ? "light" : "dark";
 }
 
-type Remote<T> = { state: "loading" } | { state: "error"; message: string } | { state: "ok"; data: T };
-
-function useRemote<T>(load: () => Promise<T>, key: string): Remote<T> {
-    const [remote, setRemote] = useState<Remote<T>>({ state: "loading" });
-    useEffect(() => {
-        let alive = true;
-        setRemote({ state: "loading" });
-        load().then(
-            (data) => alive && setRemote({ state: "ok", data }),
-            (error: unknown) => alive && setRemote({ state: "error", message: error instanceof Error ? error.message : String(error) }),
-        );
-        return () => {
-            alive = false;
-        };
-        // key — единственный вход, определяющий что грузить; load намеренно вне deps.
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [key]);
-    return remote;
-}
-
-function IndexPage(): React.JSX.Element {
-    const remote = useRemote<RegistryIndex>(fetchRegistryIndex, "index");
+function Routed({ hash, index }: { readonly hash: string; readonly index: RegistryIndex }): React.JSX.Element {
     const [query, setQuery] = useState("");
 
-    if (remote.state === "loading") return <p>Loading registry index…</p>;
-    if (remote.state === "error") return <p role="alert">Failed to load registry index: {remote.message}</p>;
+    const ext = /^#\/ext\/(.+)$/.exec(hash);
+    if (ext?.[1] !== undefined) return <ExtensionPage id={decodeURIComponent(ext[1])} />;
 
-    const needle = query.trim().toLowerCase();
-    const extensions = remote.data.extensions.filter(
-        (e) =>
-            e.id.toLowerCase().includes(needle) ||
-            e.displayName.toLowerCase().includes(needle) ||
-            e.description.toLowerCase().includes(needle),
-    );
+    const lang = /^#\/lang\/(.+)$/.exec(hash);
+    if (lang?.[1] !== undefined) return <LanguagePage id={decodeURIComponent(lang[1])} index={index} />;
 
-    return (
-        <>
-            <p>
-                {remote.data.extensions.length} extensions · schema v{remote.data.schemaVersion}
-                {remote.data.generatedAt !== undefined && <> · generated {remote.data.generatedAt}</>}
-            </p>
-            <input
-                type="search"
-                placeholder="Search extensions"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-            />
-            <ul>
-                {extensions.map((e) => (
-                    <li key={e.id}>
-                        <a href={`#/ext/${e.id}`}>{e.displayName}</a> — {e.description}
-                        <br />
-                        <small>
-                            {e.id} · {e.latest.version} · {e.kind}
-                        </small>
-                    </li>
-                ))}
-            </ul>
-        </>
-    );
-}
-
-function ExtensionPage({ id }: { readonly id: string }): React.JSX.Element {
-    const remote = useRemote<RegistryExtensionMeta>(() => fetchExtensionMeta(id), id);
-
-    if (remote.state === "loading") return <p>Loading {id}…</p>;
-    if (remote.state === "error") return <p role="alert">Failed to load {id}: {remote.message}</p>;
-    const meta = remote.data;
-
-    return (
-        <>
-            <p>
-                <a href="#/">← all extensions</a>
-            </p>
-            <h2>{meta.displayName}</h2>
-            <p>{meta.description}</p>
-            <dl>
-                <dt>id</dt>
-                <dd>{meta.id}</dd>
-                <dt>kind</dt>
-                <dd>{meta.kind}</dd>
-                {meta.license !== undefined && (
-                    <>
-                        <dt>license</dt>
-                        <dd>{meta.license}</dd>
-                    </>
-                )}
-                {meta.repository !== undefined && (
-                    <>
-                        <dt>repository</dt>
-                        <dd>
-                            <a href={meta.repository}>{meta.repository}</a>
-                        </dd>
-                    </>
-                )}
-                {meta.homepage !== undefined && (
-                    <>
-                        <dt>homepage</dt>
-                        <dd>
-                            <a href={meta.homepage}>{meta.homepage}</a>
-                        </dd>
-                    </>
-                )}
-            </dl>
-            <h3>Versions</h3>
-            <ul>
-                {meta.versions.map((v) => (
-                    <li key={v.version}>
-                        {v.version}
-                        {v.publishedAt !== undefined && <> · {v.publishedAt}</>}
-                        {v.size !== undefined && <> · {v.size} bytes</>}
-                        <br />
-                        <small>sha256 {v.sha256}</small>
-                    </li>
-                ))}
-            </ul>
-            {meta.readme !== undefined && (
-                <>
-                    <h3>Readme</h3>
-                    {/* Markdown пока не рендерим — заглушка показывает сырой текст. */}
-                    <pre style={{ whiteSpace: "pre-wrap" }}>{meta.readme}</pre>
-                </>
-            )}
-        </>
-    );
+    return <Home index={index} query={query} onQueryChange={setQuery} />;
 }
 
 export function App(): React.JSX.Element {
     const hash = useHashRoute();
-    const match = /^#\/ext\/(.+)$/.exec(hash);
+    const [theme, setTheme] = useState<Theme>(readTheme);
+    const remote = useRemote(fetchRegistryIndex, "index");
+
+    useEffect(() => {
+        document.documentElement.dataset["theme"] = theme;
+        localStorage.setItem("theme", theme);
+    }, [theme]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [hash]);
 
     return (
-        <main>
-            <h1>
-                <a href="#/">diode marketplace</a>
-            </h1>
-            {match?.[1] !== undefined ? <ExtensionPage id={decodeURIComponent(match[1])} /> : <IndexPage />}
-        </main>
+        <div className="page">
+            <Header theme={theme} onToggleTheme={() => setTheme(theme === "light" ? "dark" : "light")} />
+            <main>
+                {remote.state === "loading" && <p className="status-block">загрузка каталога…</p>}
+                {remote.state === "error" && (
+                    <p className="status-block error" role="alert">
+                        не удалось загрузить каталог: {remote.message}
+                    </p>
+                )}
+                {remote.state === "ok" && <Routed hash={hash} index={remote.data} />}
+            </main>
+            <Footer />
+        </div>
     );
 }

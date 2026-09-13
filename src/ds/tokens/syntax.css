@@ -1,0 +1,22 @@
+/* Syntax highlighting. Classic editor-default palettes, dark and light,
+   copied from the landing page's code sample. */
+:root{
+  --syn-comment:#6a9955;
+  --syn-keyword:#569cd6;
+  --syn-function:#dcdcaa;
+  --syn-type:#4ec9b0;
+  --syn-string:#ce9178;
+  --syn-control:#c586c0;
+  --syn-plain:var(--d-ink-2);
+  --syn-gutter:var(--d-ink-5);
+}
+[data-theme="light"]{
+  --syn-comment:#008000;
+  --syn-keyword:#0000ff;
+  --syn-function:#795e26;
+  --syn-type:#267f99;
+  --syn-string:#a31515;
+  --syn-control:#af00db;
+  --syn-plain:var(--l-ink-1);
+  --syn-gutter:var(--l-ink-4);
+}

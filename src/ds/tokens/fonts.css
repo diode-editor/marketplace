@@ -1,0 +1,3 @@
+/* Webfonts. All three families are Google Fonts — the source landing page loads them
+   from the Google CDN, so we keep that exact dependency instead of shipping binaries. */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
