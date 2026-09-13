@@ -9,7 +9,8 @@ import { fetchRegistryIndex, type RegistryIndex } from "./registry/client";
 /** Роутинг hash (#/ext/<id>, #/lang/<id>) — прямые ссылки работают на GitHub Pages без 404-трюков. */
 
 function readTheme(): Theme {
-    return localStorage.getItem("theme") === "light" ? "light" : "dark";
+    const stored = localStorage.getItem("theme");
+    return stored === "light" || stored === "dark" ? stored : "system";
 }
 
 function Routed({ hash, index }: { readonly hash: string; readonly index: RegistryIndex }): React.JSX.Element {
@@ -30,7 +31,9 @@ export function App(): React.JSX.Element {
     const remote = useRemote(fetchRegistryIndex, "index");
 
     useEffect(() => {
-        document.documentElement.dataset["theme"] = theme;
+        // system — без атрибута: палитру выбирает prefers-color-scheme
+        if (theme === "system") delete document.documentElement.dataset["theme"];
+        else document.documentElement.dataset["theme"] = theme;
         localStorage.setItem("theme", theme);
     }, [theme]);
 
@@ -40,7 +43,7 @@ export function App(): React.JSX.Element {
 
     return (
         <div className="page">
-            <Header theme={theme} onToggleTheme={() => setTheme(theme === "light" ? "dark" : "light")} />
+            <Header theme={theme} onToggleTheme={() => setTheme(theme === "system" ? "dark" : theme === "dark" ? "light" : "system")} />
             <main>
                 {remote.state === "loading" && <p className="status-block">loading the catalog…</p>}
                 {remote.state === "error" && (

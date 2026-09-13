@@ -2,7 +2,7 @@ import { Logo } from "./ds/Logo";
 
 const EDITOR_REPO = "https://github.com/diode-editor/diode";
 
-export type Theme = "dark" | "light";
+export type Theme = "system" | "dark" | "light";
 
 export function Header({ theme, onToggleTheme }: { readonly theme: Theme; readonly onToggleTheme: () => void }): React.JSX.Element {
     return (
@@ -18,7 +18,7 @@ export function Header({ theme, onToggleTheme }: { readonly theme: Theme; readon
                     <a href={`${EDITOR_REPO}/tree/main/docs`}>docs</a>
                     <a href={EDITOR_REPO}>source</a>
                     <button type="button" className="theme-toggle" onClick={onToggleTheme}>
-                        theme: {theme === "light" ? "light" : "dark"}
+                        theme: {theme}
                     </button>
                 </nav>
             </div>
