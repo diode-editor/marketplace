@@ -13,26 +13,39 @@ body {
 a { color: var(--text-accent); text-decoration: none; }
 a:hover { color: var(--text-strong); }
 
+/* Полосы с другим фоном (шапка, футер, сайдбар языка) идут во всю ширину
+   вьюпорта, контент внутри них и main держит колонку --page-max по центру. */
 .page {
-    max-width: var(--page-max);
-    margin: 0 auto;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    border-left: var(--bw-hairline) solid var(--border-hairline);
-    border-right: var(--bw-hairline) solid var(--border-hairline);
 }
-.page > main { flex: 1; }
+.page > main {
+    flex: 1;
+    width: 100%;
+    max-width: var(--page-max);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+/* .lang-layout { flex: 1 } растягивает сайдбар языковой страницы до футера. */
+.wrap {
+    width: 100%;
+    max-width: var(--page-max);
+    margin: 0 auto;
+}
 
 /* --- шапка --- */
 .site-header {
+    background: var(--surface-chrome);
+    border-bottom: var(--bw-hairline) solid var(--border-hairline);
+    font-size: var(--fs-ui);
+}
+.site-header .wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: var(--pad-nav);
-    background: var(--surface-chrome);
-    border-bottom: var(--bw-hairline) solid var(--border-hairline);
-    font-size: var(--fs-ui);
 }
 .site-nav { display: flex; gap: var(--gap-nav); align-items: center; color: var(--text-muted); }
 .site-nav a { color: inherit; }
@@ -310,6 +323,17 @@ a:hover { color: var(--text-strong); }
     display: flex;
     flex-direction: column;
     gap: var(--sp-8);
+    position: relative;
+}
+/* Фон сайдбара продолжается до левого края вьюпорта (влево скролл не растёт). */
+.lang-sidebar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 100%;
+    width: 50vw;
+    background: var(--surface-chrome);
 }
 .lang-sidebar .group { display: flex; flex-direction: column; gap: var(--sp-4); }
 .lang-sidebar .group-label {
@@ -354,13 +378,15 @@ a:hover { color: var(--text-strong); }
 
 /* --- футер --- */
 .site-footer {
-    padding: var(--pad-section);
     border-top: var(--bw-hairline) solid var(--border-hairline);
+    font-size: var(--fs-label);
+    color: var(--text-faint);
+}
+.site-footer .wrap {
+    padding: var(--pad-section);
     display: flex;
     justify-content: space-between;
     gap: var(--sp-4);
-    font-size: var(--fs-label);
-    color: var(--text-faint);
     flex-wrap: wrap;
 }
 
