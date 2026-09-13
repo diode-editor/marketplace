@@ -155,10 +155,11 @@ function Meta({ meta }: { readonly meta: RegistryExtensionMeta }): React.JSX.Ele
                     <div className="aside-block">
                         <div className="eyebrow">версии</div>
                         <div className="versions">
+                            {/* Версия может повторяться: по записи на платформенный артефакт — ключ по sha256. */}
                             {[...meta.versions]
                                 .reverse()
                                 .map((version) => (
-                                    <VersionEntry key={version.version} version={version} />
+                                    <VersionEntry key={version.sha256} version={version} />
                                 ))}
                         </div>
                     </div>
