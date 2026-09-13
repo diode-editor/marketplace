@@ -29,5 +29,12 @@
   --gap-lockup:24px;
   --gap-chip:10px;
 
+  /* Layout. Pages are full-bleed: bands with a non-canvas background (NavBar,
+     footer, chrome strips) span the whole viewport, while their content — and
+     everything else on the page — sits in a centered column --page-max wide.
+     Never wrap a whole page in a --page-max box: that clips the bands. */
   --page-max:1080px;
+  /* Canonical header row height: 18px + 16px lockup + 18px (--pad-nav). Every
+     surface (landing, store, docs) uses this exact header — don't restyle it. */
+  --header-h:52px;
 }
