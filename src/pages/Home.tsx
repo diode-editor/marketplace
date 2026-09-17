@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { FEATURED, LANGUAGES, languagesOf } from "../curation";
+import { FEATURED, LANGUAGES, languageLabelsOf } from "../curation";
 import { Badge } from "../ds/Badge";
 import { Logo } from "../ds/Logo";
 import type { RegistryIndex, RegistryIndexEntry } from "../registry/client";
@@ -14,7 +14,7 @@ function matchesQuery(entry: RegistryIndexEntry, needle: string): boolean {
 }
 
 function ExtensionRow({ entry }: { readonly entry: RegistryIndexEntry }): React.JSX.Element {
-    const langs = languagesOf(entry.id);
+    const langs = languageLabelsOf(entry.id);
     return (
         <a href={`#/ext/${entry.id}`} className="ext-row" style={{ color: "inherit" }}>
             <span className="row-name">{entry.displayName}</span>
@@ -26,7 +26,7 @@ function ExtensionRow({ entry }: { readonly entry: RegistryIndexEntry }): React.
 }
 
 function FeaturedCard({ entry }: { readonly entry: RegistryIndexEntry }): React.JSX.Element {
-    const langs = languagesOf(entry.id);
+    const langs = languageLabelsOf(entry.id);
     return (
         <a href={`#/ext/${entry.id}`} className="featured-card" style={{ color: "inherit" }}>
             <div className="card-head">
