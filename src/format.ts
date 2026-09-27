@@ -41,5 +41,5 @@ export function formatEngines(engines: RegistryEngines): string {
 }
 
 export function installCommand(extensionId: string): string {
-    return `diode ext add ${extensionId}`;
+    return `diode --install-extension ${extensionId}`;
 }
