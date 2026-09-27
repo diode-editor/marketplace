@@ -27,7 +27,7 @@ function Sidebar({ activeId }: { readonly activeId: string }): React.JSX.Element
             <div className="side-note">
                 The catalog is curated: only what has been verified in diode makes it in.
                 <br />
-                Installs into ~/.diode/ext
+                Installs into ~/.diode/extensions
             </div>
         </aside>
     );
