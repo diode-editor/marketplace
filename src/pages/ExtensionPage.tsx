@@ -6,7 +6,7 @@ import { Logo } from "../ds/Logo";
 import { formatDate, formatEngines, formatSize, installCommand, KIND_LABELS, latestVersion } from "../format";
 import { useRemote } from "../hooks";
 import { renderMarkdown } from "../markdown";
-import { fetchExtensionMeta, type RegistryExtensionMeta, type RegistryVersion } from "../registry/client";
+import { fetchExtensionMeta, type RegistryExtensionMeta, type RegistrySupport, type RegistryVersion } from "../registry/client";
 
 function artifactUrl(version: RegistryVersion): string | undefined {
     return version.artifact.type === "url" ? version.artifact.url : undefined;
@@ -27,6 +27,40 @@ function VersionEntry({ version }: { readonly version: RegistryVersion }): React
                 sha256 {version.sha256.slice(0, 16)}…
             </span>
         </div>
+    );
+}
+
+/**
+ * Пометка о частичной поддержке: что работает и чего человек лишится. Стоит
+ * НАД readme — это решение «ставить или нет», а не справка; у полностью
+ * поддержанного расширения блока нет вовсе.
+ */
+function SupportNote({ support }: { readonly support: RegistrySupport }): React.JSX.Element | null {
+    if (support.level !== "partial") return null;
+    const columns = [
+        { title: "Works in Diode", items: support.works, className: "support-works" },
+        { title: "Does not work", items: support.limits, className: "support-limits" },
+    ].filter((column) => column.items !== undefined && column.items.length > 0);
+
+    return (
+        <section className="support-note">
+            <div className="support-head">
+                <Badge tone="accent">partial support</Badge>
+                <span>Some of this extension does not work in Diode.</span>
+            </div>
+            <div className="support-columns">
+                {columns.map((column) => (
+                    <div key={column.title} className={column.className}>
+                        <h4>{column.title}</h4>
+                        <ul>
+                            {column.items?.map((item) => (
+                                <li key={item}>{item}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
+        </section>
     );
 }
 
@@ -56,6 +90,7 @@ function Meta({ meta }: { readonly meta: RegistryExtensionMeta }): React.JSX.Ele
                             {meta.displayName}
                         </h1>
                         {latest !== undefined && <Badge tone="accent">{latest.version}</Badge>}
+                        {meta.support?.level === "partial" && <Badge tone="neutral">partial support</Badge>}
                     </div>
                     <p className="lead">{meta.description}</p>
                     <div className="meta-line">
@@ -102,6 +137,7 @@ function Meta({ meta }: { readonly meta: RegistryExtensionMeta }): React.JSX.Ele
             <div className="ext-body">
                 <div className="ext-main">
                     <div className="ext-main-inner">
+                        {meta.support !== undefined && <SupportNote support={meta.support} />}
                         <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
                             <span className="eyebrow">01 / overview</span>
                             {meta.readme !== undefined && <span className="file-label">README.md</span>}
@@ -137,6 +173,12 @@ function Meta({ meta }: { readonly meta: RegistryExtensionMeta }): React.JSX.Ele
                                 <dt>kind</dt>
                                 <dd>{KIND_LABELS[meta.kind]}</dd>
                             </div>
+                            {meta.support !== undefined && (
+                                <div className="fact">
+                                    <dt>support</dt>
+                                    <dd>{meta.support.level}</dd>
+                                </div>
+                            )}
                             {latest?.size !== undefined && (
                                 <div className="fact">
                                     <dt>size</dt>

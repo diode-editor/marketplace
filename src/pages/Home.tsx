@@ -17,7 +17,10 @@ function ExtensionRow({ entry }: { readonly entry: RegistryIndexEntry }): React.
     const langs = languageLabelsOf(entry.id);
     return (
         <a href={`#/ext/${entry.id}`} className="ext-row" style={{ color: "inherit" }}>
-            <span className="row-name">{entry.displayName}</span>
+            <span className="row-name">
+                {entry.displayName}
+                {entry.support?.level === "partial" && <span className="row-partial">partial</span>}
+            </span>
             <span className="row-desc">{entry.description}</span>
             <span className="row-by">{langs.length > 0 ? langs.join(", ") : `@${entry.publisher}`}</span>
             <span className="row-version">{entry.latest.version}</span>
@@ -34,7 +37,10 @@ function FeaturedCard({ entry }: { readonly entry: RegistryIndexEntry }): React.
                     <Logo variant="mark" size={16} />
                     {entry.displayName}
                 </span>
-                <Badge tone="neutral">{entry.latest.version}</Badge>
+                <span style={{ display: "inline-flex", gap: "var(--sp-3)", alignItems: "center" }}>
+                    {entry.support?.level === "partial" && <Badge tone="accent">partial</Badge>}
+                    <Badge tone="neutral">{entry.latest.version}</Badge>
+                </span>
             </div>
             <p>{entry.description}</p>
             <div className="card-meta">
