@@ -23,6 +23,11 @@ src/pages/               главная, страница расширения, 
 GitHub Pages без 404-трюков. Данные — рантайм-fetch `registry/v1/index.json`
 и `meta/<id>.json` с того же origin.
 
+Пометка о поддержке (`support` в индексе и мете) — курационное поле реестра:
+`level: "partial"` даёт бейдж `partial` в списке и блок «works / does not work»
+над readme на странице расширения. Типичный повод — webview: языковая часть
+расширения работает, чат-панель у нас не откроется.
+
 Типы контракта срисованы с норматива `registryFormat.ts` в
 [репозитории редактора](https://github.com/diode-editor/diode)
 (`src/vs/platform/extensionManagement/common/`). Ломающая смена контракта

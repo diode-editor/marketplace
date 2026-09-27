@@ -36,6 +36,22 @@ export interface RegistryVersion {
     readonly publishedAt?: string;
 }
 
+/**
+ * Насколько расширение работает в Diode. Курационное поле реестра: его пишет
+ * не манифест расширения, а мейнтейнер магазина. `partial` всегда несёт
+ * непустой `limits` — иначе пометка ничего не сообщает (норматив отвергает
+ * такую запись на публикации).
+ */
+export type RegistrySupportLevel = "full" | "partial";
+
+export interface RegistrySupport {
+    readonly level: RegistrySupportLevel;
+    /** Что работает — короткими пунктами. */
+    readonly works?: readonly string[];
+    /** Что НЕ работает и почему. */
+    readonly limits?: readonly string[];
+}
+
 export interface RegistryIndexEntry {
     readonly id: string;
     readonly publisher: string;
@@ -44,6 +60,8 @@ export interface RegistryIndexEntry {
     readonly description: string;
     readonly kind: RegistryExtensionKind;
     readonly categories?: readonly string[];
+    /** Пометка о поддержке; в индексе она есть ради бейджа списка. */
+    readonly support?: RegistrySupport;
     readonly latest: { readonly version: string; readonly engines: RegistryEngines };
 }
 
@@ -61,6 +79,7 @@ export interface RegistryExtensionMeta {
     readonly displayName: string;
     readonly description: string;
     readonly kind: RegistryExtensionKind;
+    readonly support?: RegistrySupport;
     readonly repository?: string;
     readonly license?: string;
     readonly homepage?: string;
