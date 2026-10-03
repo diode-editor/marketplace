@@ -27,6 +27,7 @@ export const FEATURED: readonly string[] = [
     "detachhead.basedpyright",
     "charliermarsh.ruff",
     "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
     "EditorConfig.EditorConfig",
     "maptz.regionfolder",
 ];
@@ -42,8 +43,8 @@ export const LANGUAGES: readonly LanguageCuration[] = [
         id: "typescript",
         label: "typescript / javascript",
         aliases: ["javascript"],
-        blurb: "Types, navigation and completion ship with diode itself — the builtin client runs the stock typescript-language-server. The catalog adds ESLint: diagnostics from the linter installed in your project, quick fixes per rule and fix-on-save.",
-        recommended: ["dbaeumer.vscode-eslint"],
+        blurb: "Types, navigation and completion ship with diode itself — the builtin client runs the stock typescript-language-server. The catalog adds ESLint — diagnostics from the linter installed in your project, quick fixes per rule and fix-on-save — and Prettier, which formats the whole document or the selection.",
+        recommended: ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"],
     },
     {
         id: "java",
@@ -58,6 +59,7 @@ export const EXTENSION_LANGUAGES: Readonly<Record<string, readonly string[]>> = 
     "detachhead.basedpyright": ["python"],
     "charliermarsh.ruff": ["python"],
     "dbaeumer.vscode-eslint": ["typescript"],
+    "esbenp.prettier-vscode": ["typescript"],
     "redhat.java": ["java"],
 };
 
