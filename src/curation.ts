@@ -27,6 +27,7 @@ export const FEATURED: readonly string[] = [
     "detachhead.basedpyright",
     "charliermarsh.ruff",
     "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
     "EditorConfig.EditorConfig",
     "maptz.regionfolder",
 ];
@@ -42,8 +43,14 @@ export const LANGUAGES: readonly LanguageCuration[] = [
         id: "typescript",
         label: "typescript / javascript",
         aliases: ["javascript"],
-        blurb: "Types, navigation and completion ship with diode itself — the builtin client runs the stock typescript-language-server. The catalog adds ESLint: diagnostics from the linter installed in your project, quick fixes per rule and fix-on-save.",
-        recommended: ["dbaeumer.vscode-eslint"],
+        blurb: "Types, navigation and completion ship with diode itself — the builtin client runs the stock typescript-language-server. The catalog adds ESLint — diagnostics from the linter installed in your project, quick fixes per rule and fix-on-save — and Prettier, which formats the whole document or the selection.",
+        recommended: ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"],
+    },
+    {
+        id: "java",
+        label: "java",
+        blurb: "Java support comes from Red Hat's extension running the Eclipse JDT language server: diagnostics, completion, navigation into library sources, refactorings and source generation. Maven and Gradle projects are imported by the server itself, and the platform builds bundle a JRE — you do not need to install a JDK.",
+        recommended: ["redhat.java"],
     },
 ];
 
@@ -52,6 +59,8 @@ export const EXTENSION_LANGUAGES: Readonly<Record<string, readonly string[]>> = 
     "detachhead.basedpyright": ["python"],
     "charliermarsh.ruff": ["python"],
     "dbaeumer.vscode-eslint": ["typescript"],
+    "esbenp.prettier-vscode": ["typescript"],
+    "redhat.java": ["java"],
 };
 
 export function languageById(id: string): LanguageCuration | undefined {

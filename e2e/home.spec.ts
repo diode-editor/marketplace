@@ -41,6 +41,11 @@ test("подборка: карточки — пересечение FEATURED с 
 test("чипы языков ведут на страницы языков", async ({ page }) => {
     await page.goto(".");
     for (const lang of LANGUAGES) {
-        await expect(page.locator(".chip", { hasText: lang.label })).toHaveAttribute("href", `#/lang/${lang.id}`);
+        // Подпись матчим ЦЕЛИКОМ: `hasText` ищет подстроку, и чип `java` совпал бы
+        // ещё и с `typescript / javascript`.
+        await expect(page.getByRole("link", { name: lang.label, exact: true })).toHaveAttribute(
+            "href",
+            `#/lang/${lang.id}`,
+        );
     }
 });
