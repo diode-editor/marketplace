@@ -52,6 +52,12 @@ export const LANGUAGES: readonly LanguageCuration[] = [
         blurb: "Java support comes from Red Hat's extension running the Eclipse JDT language server: diagnostics, completion, navigation into library sources, refactorings and source generation. Maven and Gradle projects are imported by the server itself, and the platform builds bundle a JRE — you do not need to install a JDK.",
         recommended: ["redhat.java"],
     },
+    {
+        id: "go",
+        label: "go",
+        blurb: "Go support is the Go team's own extension running gopls: diagnostics, hover with doc comments, go to definition, completion with auto-import, and gofmt with organize imports on save. It needs the Go toolchain on your PATH; gopls is installed by the extension itself on first start.",
+        recommended: ["golang.go"],
+    },
 ];
 
 /** Привязка расширений к языкам — для строк списка и карточек. */
@@ -61,6 +67,7 @@ export const EXTENSION_LANGUAGES: Readonly<Record<string, readonly string[]>> = 
     "dbaeumer.vscode-eslint": ["typescript"],
     "esbenp.prettier-vscode": ["typescript"],
     "redhat.java": ["java"],
+    "golang.go": ["go"],
 };
 
 export function languageById(id: string): LanguageCuration | undefined {
