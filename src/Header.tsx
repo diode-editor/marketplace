@@ -15,7 +15,7 @@ export function Header({ theme, onToggleTheme }: { readonly theme: Theme; readon
                     <a href="#/" className="active">
                         extensions
                     </a>
-                    <a href={`${EDITOR_REPO}/tree/main/docs`}>docs</a>
+                    <a href="/docs/">docs</a>
                     <a href={EDITOR_REPO}>source</a>
                     <button type="button" className="theme-toggle" onClick={onToggleTheme}>
                         theme: {theme}
